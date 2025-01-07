@@ -140,11 +140,11 @@ def respond(message, chat_history, llm, history_len=3, temperature=0.1, max_toke
         bot_message = get_completion(
             formatted_prompt, llm, temperature=temperature, max_tokens=max_tokens)
         # 将bot_message中\n换为<br/>
-        bot_message = re.sub(r"\\n", '<br/>', bot_message)
+        bot_message_adjusted = re.sub(r"\\n", '<br/>', bot_message)
         # 将用户的消息和机器人的回复加入到聊天历史记录中。
-        chat_history.append((message, bot_message))
+        chat_history.append((message, bot_message_adjusted))
         # 返回一个空字符串和更新后的聊天历史记录（这里的空字符串可以替换为真正的机器人回复，如果需要显示在界面上）。
-        return "", chat_history
+        return bot_message, chat_history
     except Exception as e:
         return e, chat_history
 
