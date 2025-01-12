@@ -75,7 +75,7 @@ class Wenxin_LLM(Self_LLM):
         headers = {
             'Content-Type': 'application/json'
         }
-        print(url)
+        print(f"url: {url}")
         # 发起请求
         response = requests.request("POST", url, headers=headers, data=payload, timeout=self.request_timeout)
         if response.status_code == 200:
