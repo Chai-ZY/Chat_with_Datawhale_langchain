@@ -47,6 +47,7 @@ def get_completion(prompt :str, model :str, temperature=0.1,api_key=None, secret
     if model in ["gpt-3.5-turbo", "gpt-3.5-turbo-16k-0613", "gpt-3.5-turbo-0613", "gpt-4", "gpt-4-32k"]:
         return get_completion_gpt(prompt, model, temperature, api_key, max_tokens)
     elif model in ["ERNIE-Bot", "ERNIE-Bot-4", "ERNIE-Bot-turbo"]:
+        print("enter llm-cal_llm-get_completion-Goto-wenxin")
         return get_completion_wenxin(prompt, model, temperature, api_key, secret_key)
     elif model in ["Spark-1.5", "Spark-2.0"]:
         return get_completion_spark(prompt, model, temperature, api_key, appid, api_secret, max_tokens)
