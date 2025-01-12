@@ -154,6 +154,7 @@ def respond(message, chat_history, llm, history_len=3, temperature=0.1, max_toke
         # 返回一个空字符串和更新后的聊天历史记录（这里的空字符串可以替换为真正的机器人回复，如果需要显示在界面上）。
         return bot_message, chat_history
     except Exception as e:
+        print(e)
         return e, chat_history
 
 
