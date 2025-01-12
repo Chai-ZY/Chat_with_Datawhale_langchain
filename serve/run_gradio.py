@@ -163,6 +163,7 @@ with block as demo:
                 <center>LLM-UNIVERSE</center>
                 """)
         gr.Image(value=DATAWHALE_LOGO_PATH, scale=1, min_width=10, show_label=False, show_download_button=False, container=False)
+        print(11)
 
     with gr.Row():
         with gr.Column(scale=4):
@@ -219,6 +220,8 @@ with block as demo:
                 embeddings = gr.Dropdown(EMBEDDING_MODEL_LIST,
                                          label="Embedding model",
                                          value=INIT_EMBEDDING_MODEL)
+        print(22)
+            
 
         # 设置初始化向量数据库按钮的点击事件。当点击时，调用 create_db_info 函数，并传入用户的文件和希望使用的 Embedding 模型。
         init_db.click(create_db_info,
@@ -231,6 +234,7 @@ with block as demo:
         # 设置按钮的点击事件。当点击时，调用上面定义的 qa_chain_self_answer 函数，并传入用户的消息和聊天历史记录，然后更新文本框和聊天机器人组件。
         db_wo_his_btn.click(model_center.qa_chain_self_answer, inputs=[
                             msg, chatbot, llm, embeddings, temperature, top_k], outputs=[msg, chatbot])
+        print(33)
         # 设置按钮的点击事件。当点击时，调用上面定义的 respond 函数，并传入用户的消息和聊天历史记录，然后更新文本框和聊天机器人组件。
         llm_btn.click(respond, inputs=[
                       msg, chatbot, llm, history_len, temperature], outputs=[msg, chatbot], show_progress="minimal")
