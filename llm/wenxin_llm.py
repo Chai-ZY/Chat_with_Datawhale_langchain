@@ -75,12 +75,13 @@ class Wenxin_LLM(Self_LLM):
         headers = {
             'Content-Type': 'application/json'
         }
+        print(url)
         # 发起请求
         response = requests.request("POST", url, headers=headers, data=payload, timeout=self.request_timeout)
         if response.status_code == 200:
             # 返回的是一个 Json 字符串
             js = json.loads(response.text)
-            # print(js)
+            print(js)
             return js["result"]
         else:
             return "请求失败"
