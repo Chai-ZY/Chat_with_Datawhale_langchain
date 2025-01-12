@@ -129,9 +129,11 @@ def respond(message, chat_history, llm, history_len=3, temperature=0.1, max_toke
     "": 空字符串表示没有内容需要显示在界面上，可以替换为真正的机器人回复。
     chat_history: 更新后的聊天历史记录
     """
+    print(44)
     if message == None or len(message) < 1:
             return "", chat_history
     try:
+        print(55)
         # 限制 history 的记忆长度
         chat_history = chat_history[-history_len:] if history_len > 0 else []
         # 调用上面的函数，将用户的消息和聊天历史记录格式化为一个 prompt。
