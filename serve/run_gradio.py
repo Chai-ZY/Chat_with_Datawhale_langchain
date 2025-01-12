@@ -138,11 +138,15 @@ def respond(message, chat_history, llm, history_len=3, temperature=0.1, max_toke
         chat_history = chat_history[-history_len:] if history_len > 0 else []
         # 调用上面的函数，将用户的消息和聊天历史记录格式化为一个 prompt。
         formatted_prompt = format_chat_prompt(message, chat_history)
+        print(formatted_prompt)
+        print(llm)
         # 使用llm对象的predict方法生成机器人的回复（注意：llm对象在此代码中并未定义）。
         bot_message = get_completion(
             formatted_prompt, llm, temperature=temperature, max_tokens=max_tokens)
         print(f"formatted_prompt: {formatted_prompt}")
         print(f"llm: {llm}")
+        print(bot_message)
+        print(66)
         # 将bot_message中\n换为<br/>
         bot_message_adjusted = re.sub(r"\\n", '<br/>', bot_message)
         # 将用户的消息和机器人的回复加入到聊天历史记录中。
