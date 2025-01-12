@@ -108,8 +108,12 @@ def get_completion_wenxin(prompt : str, model : str, temperature : float, api_ke
     headers = {
         'Content-Type': 'application/json'
     }
+    print("start calling wenxin api: ")
+    print(f"url: {url}")
+    print(f"data: {data}")
     # 发起请求
     response = requests.request("POST", url, headers=headers, data=payload)
+    print(f"response: {response}")
     # 返回的是一个 Json 字符串
     js = json.loads(response.text)
     return js["result"]
