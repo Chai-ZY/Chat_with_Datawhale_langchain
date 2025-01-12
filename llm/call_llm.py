@@ -96,7 +96,9 @@ def get_completion_wenxin(prompt : str, model : str, temperature : float, api_ke
     access_token = get_access_token(api_key, secret_key)
     print(f"access_token: {access_token}")
     # 调用接口
-    url = f"https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/eb-instant?access_token={access_token}"
+    # url = f"https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/eb-instant?access_token={access_token}"
+    # 试试换用文心官网的ERNIE-4.0-8K api
+    url = f"https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/completions_pro?access_token={access_token}"
     # 配置 POST 参数
     payload = json.dumps({
         "messages": [
