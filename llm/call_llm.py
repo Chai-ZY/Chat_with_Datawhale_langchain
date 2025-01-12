@@ -110,7 +110,7 @@ def get_completion_wenxin(prompt : str, model : str, temperature : float, api_ke
     }
     print("start calling wenxin api: ")
     print(f"url: {url}")
-    print(f"data: {data}")
+    print(f"data: {payload}")
     # 发起请求
     response = requests.request("POST", url, headers=headers, data=payload)
     print(f"response: {response}")
