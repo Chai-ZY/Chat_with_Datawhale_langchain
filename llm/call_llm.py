@@ -94,6 +94,7 @@ def get_completion_wenxin(prompt : str, model : str, temperature : float, api_ke
         api_key, secret_key = parse_llm_api_key("wenxin")
     # 获取access_token
     access_token = get_access_token(api_key, secret_key)
+    print(f"access_token: {access_token}")
     # 调用接口
     url = f"https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/eb-instant?access_token={access_token}"
     # 配置 POST 参数
