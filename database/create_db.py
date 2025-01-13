@@ -12,8 +12,8 @@ from langchain.document_loaders import PyMuPDFLoader
 from langchain.vectorstores import Chroma
 # 首先实现基本配置
 
-DEFAULT_DB_PATH = "./knowledge_db"
-DEFAULT_PERSIST_PATH = "./vector_db"
+DEFAULT_DB_PATH = "/content/Chat_with_Datawhale_langchain/knowledge_db"
+DEFAULT_PERSIST_PATH = "/content/Chat_with_Datawhale_langchain/vector_db"
 
 
 def get_files(dir_path):
