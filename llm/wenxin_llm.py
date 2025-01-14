@@ -37,7 +37,8 @@ def get_access_token(api_key : str, secret_key : str):
 class Wenxin_LLM(Self_LLM):
     # 文心大模型的自定义 LLM
     # URL
-    url : str = "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/eb-instant?access_token={}"
+    # url : str = "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/eb-instant?access_token={}"
+    url : str = "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/completions_pro?access_token={}"
     # Secret_Key
     secret_key : str = None
     # access_token
