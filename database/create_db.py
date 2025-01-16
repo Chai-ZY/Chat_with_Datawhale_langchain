@@ -69,7 +69,10 @@ def create_db(files=DEFAULT_DB_PATH, persist_directory=DEFAULT_PERSIST_PATH, emb
     docs = []
     for loader in loaders:
         if loader is not None:
-            docs.extend(loader.load())
+            documents = loader.load()
+            for i, page in enumerate(documents):
+                print(f"检查文档加载： {page.page_content}")
+            docs.extend(documents)
     # 切分文档
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=500, chunk_overlap=150)
