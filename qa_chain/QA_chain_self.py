@@ -33,6 +33,7 @@ class QA_chain_self():
     有用的回答:"""
 
     def __init__(self, model:str, temperature:float=0.0, top_k:int=4,  file_path:str=None, persist_path:str=None, appid:str=None, api_key:str=None, Spark_api_secret:str=None,Wenxin_secret_key:str=None, embedding = "openai",  embedding_key = None, template=default_template_rq):
+        print("init-DEBUG: ")
         self.model = model
         self.temperature = temperature
         self.top_k = top_k
@@ -46,17 +47,25 @@ class QA_chain_self():
         self.embedding_key = embedding_key
         self.template = template
         self.vectordb = get_vectordb(self.file_path, self.persist_path, self.embedding,self.embedding_key)
+        print(f"DEBUG: vectordb type: {type(self.vectordb)}")
+        print(f"DEBUG: vectordb content: {self.vectordb}")  # 视情况而定，可能需要深入到 vectordb 的具体属性
+    
         self.llm = model_to_llm(self.model, self.temperature, self.appid, self.api_key, self.Spark_api_secret,self.Wenxin_secret_key)
+        print(f"DEBUG: llm initialized: {self.llm}")
 
         self.QA_CHAIN_PROMPT = PromptTemplate(input_variables=["context","question"],
                                     template=self.template)
         self.retriever = self.vectordb.as_retriever(search_type="similarity",   
                                         search_kwargs={'k': self.top_k})  #默认similarity，k=4
+        print(f"DEBUG: retriever type: {type(self.retriever)}")
+        print(f"DEBUG: retriever content: {self.retriever}")
+        
         # 自定义 QA 链
         self.qa_chain = RetrievalQA.from_chain_type(llm=self.llm,
                                         retriever=self.retriever,
                                         return_source_documents=True,
                                         chain_type_kwargs={"prompt":self.QA_CHAIN_PROMPT})
+        print(f"DEBUG: qa_chain initialized: {self.qa_chain}")
 
     #基于大模型的问答 prompt 使用的默认提示模版
     #default_template_llm = """请回答下列问题:{question}"""
@@ -67,6 +76,7 @@ class QA_chain_self():
         arguments: 
         - question：用户提问
         """
+        print("answer-DEBUG: ")
 
         if len(question) == 0:
             return ""
@@ -78,7 +88,15 @@ class QA_chain_self():
             top_k = self.top_k
 
         print(f"qa_chain/QA_chain_self: retriever: {self.retriever}")
-        result = self.qa_chain({"query": question, "temperature": temperature, "top_k": top_k})
-        answer = result["result"]
-        answer = re.sub(r"\\n", '<br/>', answer)
-        return answer   
+        print(f"DEBUG: Using QA chain: {self.qa_chain}")
+        
+        try:
+            result = self.qa_chain({"query": question, "temperature": temperature, "top_k": top_k})
+            print(f"DEBUG: QA chain result: {result}")
+        
+            answer = result["result"]
+            answer = re.sub(r"\\n", '<br/>', answer)
+            return answer
+        except Exception as e:
+            print(f"ERROR: An error occurred while retrieving the answer: {e}")
+            return "An error occurred while processing your request."
