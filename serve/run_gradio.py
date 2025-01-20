@@ -203,7 +203,7 @@ with block as demo:
                                         interactive=True)
 
                 top_k = gr.Slider(1,
-                                  10,
+                                  100,
                                   value=3,
                                   step=1,
                                   label="vector db search top k",
