@@ -65,6 +65,7 @@ def create_db(files=DEFAULT_DB_PATH, persist_directory=DEFAULT_PERSIST_PATH, emb
     if type(files) != list:
         files = [files]
     loaders = []
+    print(f"debug print files: {files}")
     [file_loader(file, loaders) for file in files]
     docs = []
     for loader in loaders:
