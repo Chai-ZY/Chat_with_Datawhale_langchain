@@ -65,9 +65,13 @@ def create_db(files=DEFAULT_DB_PATH, persist_directory=DEFAULT_PERSIST_PATH, emb
     if type(files) != list:
         files = [files]
     # 打印所有文件名
-    print("以下是 files 中所有文件的文件名：")
     for file in files:
-        print(f"- {os.path.basename(file)}")
+        if isinstance(file, (str, bytes, os.PathLike)):
+            print(f"- {os.path.basename(file)}")
+        elif hasattr(file, "name"):  # 检查是否有 `name` 属性
+            print(f"- {os.path.basename(file.name)} (from TemporaryFile)")
+        else:
+            print(f"无法处理的文件对象：{file} (类型: {type(file)})")
     loaders = []
     [file_loader(file, loaders) for file in files]
     docs = []
