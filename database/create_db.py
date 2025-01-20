@@ -64,8 +64,11 @@ def create_db(files=DEFAULT_DB_PATH, persist_directory=DEFAULT_PERSIST_PATH, emb
         return "can't load empty file"
     if type(files) != list:
         files = [files]
+    # 打印所有文件名
+    print("以下是 files 中所有文件的文件名：")
+    for file in files:
+        print(f"- {os.path.basename(file)}")
     loaders = []
-    print(f"debug print files: {files}")
     [file_loader(file, loaders) for file in files]
     docs = []
     for loader in loaders:
